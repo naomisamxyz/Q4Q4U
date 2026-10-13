@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+  <title>Q4Q4U</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="decode.js" defer></script>
+</head>
+<body>
+
+  <!-- BACKGROUND START -->
+  <!-- embossing filter -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <!-- embossing filter -->
+    <filter id="emboss" x="-10%" y="-10%" width="120%" height="120%" color-interpolation-filters="sRGB">
+      <!-- brightness of the image becomes height, limited to the PNG's shape -->
+      <feColorMatrix in="SourceGraphic" type="luminanceToAlpha" result="lum"/>
+      <feComposite in="lum" in2="SourceAlpha" operator="in" result="height"/>
+
+      <feGaussianBlur in="height" stdDeviation="1" result="blur"/>
+      <feDiffuseLighting in="blur" surfaceScale="5" diffuseConstant="1" lighting-color="#fff" result="light">
+      <feDistantLight azimuth="225" elevation="30"/>
+      </feDiffuseLighting>
+      <feComposite in="light" in2="SourceAlpha" operator="in"/>
+    </filter>
+    <!-- glow filter -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%" color-interpolation-filters="sRGB">
+      <!-- cast shadow, bottom-right -->
+      <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="shadowBlur"/>
+      <feOffset in="shadowBlur" dx="5" dy="5" result="shadowOffset"/>
+      <feFlood flood-color="#000" flood-opacity="0.45"/>
+      <feComposite in2="shadowOffset" operator="in" result="shadow"/>
+
+      <!-- light catching the top-left edge -->
+      <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="lightBlur"/>
+      <feOffset in="lightBlur" dx="-3" dy="-3" result="lightOffset"/>
+      <feFlood flood-color="#fff" flood-opacity="0.4"/>
+      <feComposite in2="lightOffset" operator="in" result="light"/>
+
+      <feMerge result="both">
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="light"/>
+      </feMerge>
+      <feComposite in="both" in2="SourceAlpha" operator="out"/>
+    </filter>
+  </svg>
+  <div class="background-wrapper">
+    <canvas id="background"></canvas>
+  </div>
+
+  <!-- corner icons -->
+  <div class="corner-icons">
+    <img class="corner-icon glow top-left" src="background/star.png" alt="">
+    <img class="corner-icon glow top-right" src="background/star1.png" alt="">
+    <img class="corner-icon glow bottom-left" src="background/star.png" alt="">
+    <img class="corner-icon glow bottom-right" src="background/star1.png" alt="">
+
+    <a href="index.html"><img class="corner-icon top-left" src="background/star.png" alt="Home"></a>
+    <a href="index.html"><img class="corner-icon top-right" src="background/star1.png" alt="Home"></a>
+    <a href="index.html"><img class="corner-icon bottom-left" src="background/star.png" alt="Home"></a>
+    <a href="index.html"><img class="corner-icon bottom-right" src="background/star1.png" alt="Home"></a>
+  </div>
+
+  <script type="module" src="background.js"></script>
+  <!-- BACKGROUND END -->
+
+  <header>
+    <h1></h1>
+    <nav class="nav-copy" aria-hidden="true">
+      <a data-text="join">join</a>
+      <a data-text="archive">archive</a>
+      <a data-text="info">info</a>
+    </nav>
+    <nav class="nav-main">
+      <a href="join.html" data-text="join">join</a>
+      <a href="archive.html" data-text="archive">archive</a>
+      <a href="info.html" data-text="info">info</a>
+    </nav>
+    <nav class="nav-sheen" aria-hidden="true">
+      <a data-text="join">join</a>
+      <a data-text="archive">archive</a>
+      <a data-text="info">info</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <div class="info">
+      <div class="info-layer" data-layers="3">
+        <h2 data-decode>join ...</h2>
+        <br>
+        <form class="join-form">
+          <label data-decode for="fname">First name:</label>
+          <span class="field"><input type="text" id="fname" name="fname"></span>
+
+          <label data-decode for="lname">Last name:</label>
+          <span class="field"><input type="text" id="lname" name="lname"></span>
+        </form>
+
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <p></p>
+      <script src="script.js"></script>
+  </footer>
+
+  
+</body>
+</html>
