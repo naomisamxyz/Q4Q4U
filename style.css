@@ -216,7 +216,7 @@ nav:hover a::after {
 
 .corner-icon {
     position: fixed;
-    width: 4%;
+    width: 3%;
     height: auto;
     z-index: 10;
     filter: url(#emboss);
@@ -392,4 +392,47 @@ p[data-decode] {
 
 .join-form input:focus {
     outline: 1px solid white;
+}
+
+
+
+/* Outer layer: where she is on the page and how big.
+Change --x, --y and --scale (in CSS or from JS) to move or resize her. */
+
+.fairy-wrap {
+    --x: 80%;
+    --y: 45%;
+    --scale: 0.7;
+
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+
+    transform:
+        translate(-50%, -50%)
+        scale(var(--scale));
+
+    transform-origin: center;
+
+    mix-blend-mode: overlay;
+}
+
+
+.fairy-hover {
+    animation: hover 3.2s ease-in-out infinite alternate;
+}
+
+@keyframes hover {
+    from { transform: translateY(6px); }
+    to   { transform: translateY(-6px); }
+}
+
+.fairy-art {
+    margin: 0;
+    font-family: "DejaVu Sans Mono", "Menlo", "Consolas", monospace;
+    font-size: 10px;
+    line-height: 1.2;
+    letter-spacing: 0;
+    white-space: pre;
+    color: white;
 }
