@@ -1161,3 +1161,50 @@ window.addEventListener(
 
     }
 );
+
+// ============================================================
+// EMBOSS FILTERS + CORNER STARS
+// ============================================================
+
+document.body.insertAdjacentHTML("afterbegin", `
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <!-- embossing filter -->
+    <filter id="emboss" x="-10%" y="-10%" width="120%" height="120%" color-interpolation-filters="sRGB">
+      <feColorMatrix in="SourceGraphic" type="luminanceToAlpha" result="lum"/>
+      <feComposite in="lum" in2="SourceAlpha" operator="in" result="height"/>
+      <feGaussianBlur in="height" stdDeviation="1" result="blur"/>
+      <feDiffuseLighting in="blur" surfaceScale="5" diffuseConstant="1" lighting-color="#fff" result="light">
+        <feDistantLight azimuth="225" elevation="30"/>
+      </feDiffuseLighting>
+      <feComposite in="light" in2="SourceAlpha" operator="in"/>
+    </filter>
+    <!-- glow filter -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%" color-interpolation-filters="sRGB">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="shadowBlur"/>
+      <feOffset in="shadowBlur" dx="5" dy="5" result="shadowOffset"/>
+      <feFlood flood-color="#000" flood-opacity="0.45"/>
+      <feComposite in2="shadowOffset" operator="in" result="shadow"/>
+      <feGaussianBlur in="SourceAlpha" stdDeviation="1" result="lightBlur"/>
+      <feOffset in="lightBlur" dx="-3" dy="-3" result="lightOffset"/>
+      <feFlood flood-color="#fff" flood-opacity="0.4"/>
+      <feComposite in2="lightOffset" operator="in" result="light"/>
+      <feMerge result="both">
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="light"/>
+      </feMerge>
+      <feComposite in="both" in2="SourceAlpha" operator="out"/>
+    </filter>
+  </svg>
+
+  <div class="corner-icons">
+    <img class="corner-icon glow top-left" src="background/star.png" alt="">
+    <img class="corner-icon glow top-right" src="background/star1.png" alt="">
+    <img class="corner-icon glow bottom-left" src="background/star.png" alt="">
+    <img class="corner-icon glow bottom-right" src="background/star1.png" alt="">
+
+    <a href="index.html"><img class="corner-icon top-left" src="background/star.png" alt="Home"></a>
+    <a href="index.html"><img class="corner-icon top-right" src="background/star1.png" alt="Home"></a>
+    <a href="index.html"><img class="corner-icon bottom-left" src="background/star.png" alt="Home"></a>
+    <a href="index.html"><img class="corner-icon bottom-right" src="background/star1.png" alt="Home"></a>
+  </div>
+`);
